@@ -15,3 +15,5 @@ assets/ref/
 .DS_Store
 .idea/
 *.log
+.vercel
+.env*
