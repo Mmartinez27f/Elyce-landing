@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1B4332">
+  <title>Elyce WMS — Control de bodega para PyMEs chilenas</title>
+  <meta name="description" content="WMS en desarrollo para PyMEs chilenas: escaneo QR desde el celular, stock por ubicación, multi-sucursal y cola offline. Early access y piloto cerrado en el Biobío.">
+  <meta property="og:title" content="Elyce WMS — Warehouse Management para PyMEs">
+  <meta property="og:description" content="Tu bodega bajo control — producto en desarrollo. Escaneo móvil, trazabilidad y lista de espera para early access en el Biobío.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elyce.cl/">
+  <meta property="og:image" content="https://elyce.cl/assets/escenas/01_galpon.webp">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1080">
+  <meta property="og:locale" content="es_CL">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Elyce WMS — Control de bodega para PyMEs">
+  <meta name="twitter:description" content="Escaneo QR, multi-sucursal y operación offline. Early access desde el Biobío.">
+  <meta name="twitter:image" content="https://elyce.cl/assets/escenas/01_galpon.webp">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" as="image" href="./assets/escenas/01_galpon.webp" type="image/webp" fetchpriority="high">
+  <link rel="canonical" href="https://elyce.cl/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Elyce WMS",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web, Android, iOS, Windows",
+    "description": "Sistema de gestión de bodegas para PyMEs chilenas: escaneo QR, multi-sucursal y operación offline.",
+    "applicationSubCategory": "Warehouse Management System",
+    "availability": "https://schema.org/PreOrder",
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "CLF",
+      "lowPrice": "1",
+      "highPrice": "6",
+      "offerCount": "3",
+      "description": "Precios referenciales en UF mensual más IVA. No constituye oferta comercial. Producto en desarrollo — early access."
+    },
+    "areaServed": { "@type": "Country", "name": "Chile" }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,12..72,400;0,12..72,500;0,12..72,600;1,12..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles-brand.css">
+  <link rel="stylesheet" href="experiencia-v4.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Saltar al contenido</a>
+  <div class="read-progress" id="read-progress" aria-hidden="true"><span class="read-progress-bar"></span></div>
+
+  <header class="site-header site-header--experiencia site-header--float" id="site-header">
+    <div class="container header-inner">
+      <a href="#hero" class="brand" aria-label="Elyce WMS inicio">
+        <img src="assets/logo-lockup.svg" alt="Elyce Warehouse Management" class="brand-lockup" width="200" height="36">
+      </a>
+      <nav class="nav-desktop" aria-label="Principal">
+        <a href="#transformacion" data-nav="transformacion">Por qué Elyce</a>
+        <a href="#pasos" data-nav="pasos">Operación</a>
+        <a href="#para-quien" data-nav="para-quien">Para quién</a>
+        <a href="#servicios" data-nav="servicios">Capacidades</a>
+        <a href="#whitelist" data-nav="whitelist">Lista de espera</a>
+        <a href="#faq" data-nav="faq">FAQ</a>
+      </nav>
+      <a href="#whitelist" class="btn btn-primary btn-sm">Early access</a>
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+    </div>
+    <nav class="nav-mobile" aria-label="Móvil">
+      <a href="#transformacion">Por qué Elyce</a>
+      <a href="#pasos">Operación</a>
+      <a href="#para-quien">Para quién</a>
+      <a href="#servicios">Capacidades</a>
+      <a href="#whitelist">Lista de espera</a>
+      <a href="#faq">FAQ</a>
+      <a href="#whitelist" class="btn btn-primary">Early access</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="hero" class="hero-v4" aria-label="Elyce WMS">
+      <div class="hero-v4-bg" aria-hidden="true">
+        <picture>
+          <source srcset="./assets/escenas/01_galpon.webp" type="image/webp">
+          <img src="./assets/escenas/01_galpon.png" alt="" width="1920" height="1080" loading="eager" fetchpriority="high">
+        </picture>
+        <div class="hero-v4-bg-overlay"></div>
+      </div>
+
+      <div class="container hero-v4-grid">
+        <div class="hero-v4-copy">
+          <p class="eyebrow hero-eyebrow">
+            <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+            WMS para distribuidoras · Biobío, Chile · Early access
+          </p>
+          <h1 class="hero-v4-title">
+            Tu bodega bajo control — <em>sin pistolas ni Excel frágil</em>
+          </h1>
+          <p class="hero-v4-lead">Escaneo QR desde el celular, stock por ubicación, multi-sucursal y cola offline. Producto en desarrollo — regístrate para early access o piloto cerrado en el Biobío.</p>
+          <div class="hero-v4-actions hero-v4-actions--primary">
+            <a href="#whitelist" class="btn btn-primary btn-hero">Unirme a la lista de espera</a>
+          </div>
+          <form id="hero-email-bridge" class="hero-bridge-form" novalidate aria-label="Ir al formulario con tu correo">
+            <label class="hero-bridge-field">
+              <span class="hero-bridge-label">¿Prefieres empezar por aquí?</span>
+              <input type="email" id="hero-email-input" name="email" autocomplete="email" maxlength="160" placeholder="Tu correo corporativo" aria-describedby="hero-bridge-hint">
+            </label>
+            <button type="submit" class="btn btn-outline btn-hero-outline btn-bridge">Continuar al formulario</button>
+            <p id="hero-bridge-hint" class="hero-bridge-hint">Un solo registro: nombre, empresa, teléfono y rubro son obligatorios más abajo. Sin compra ni facturación.</p>
+          </form>
+          <ul class="hero-v4-trust">
+            <li>
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg>
+              Desarrollado en el Biobío
+            </li>
+            <li>
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+              Sin compra ni facturación aún
+            </li>
+            <li>
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0z" stroke="currentColor" stroke-width="2"/></svg>
+              Offline-first en almacén
+            </li>
+          </ul>
+        </div>
+
+        <div id="hero-visual" class="hero-v4-visual">
+          <div class="hero-brand-panel" role="img" aria-label="Flujo de referencia Elyce: recepción, ubicación, picking y cliente, con ejemplo de escaneo en ubicación PV-P01-MT03">
+            <div class="hero-brand-panel__head">
+              <span class="hero-brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="36" height="36" rx="8" fill="#1B4332"/>
+                  <rect x="8" y="10" width="20" height="6" rx="2" fill="#52B788"/>
+                  <rect x="8" y="19" width="20" height="5" rx="2" fill="#D8F3DC"/>
+                  <rect x="8" y="27" width="13" height="5" rx="2" fill="#52B788"/>
+                  <rect x="23" y="27" width="5" height="5" rx="2" fill="#D8F3DC"/>
+                </svg>
+              </span>
+              <div>
+                <p class="hero-brand-panel__eyebrow">Flujo de referencia</p>
+                <p class="hero-brand-panel__title">De la recepción al cliente</p>
+              </div>
+            </div>
+
+            <ol class="hero-brand-flow">
+              <li class="hero-brand-flow__step">
+                <span class="hero-brand-flow__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.75"/><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+                </span>
+                <span class="hero-brand-flow__label">Recepción</span>
+              </li>
+              <li class="hero-brand-flow__arrow" aria-hidden="true">→</li>
+              <li class="hero-brand-flow__step">
+                <span class="hero-brand-flow__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-6 9 6v10a1 1 0 01-1 1H4a1 1 0 01-1-1V9z" stroke="currentColor" stroke-width="1.75"/><path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.75"/></svg>
+                </span>
+                <span class="hero-brand-flow__label">Ubicación</span>
+              </li>
+              <li class="hero-brand-flow__arrow" aria-hidden="true">→</li>
+              <li class="hero-brand-flow__step">
+                <span class="hero-brand-flow__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M6 6h15l-1.5 9h-12L6 6z" stroke="currentColor" stroke-width="1.75"/><circle cx="9" cy="19" r="1.5" fill="currentColor"/><circle cx="18" cy="19" r="1.5" fill="currentColor"/></svg>
+                </span>
+                <span class="hero-brand-flow__label">Picking</span>
+              </li>
+              <li class="hero-brand-flow__arrow" aria-hidden="true">→</li>
+              <li class="hero-brand-flow__step">
+                <span class="hero-brand-flow__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.75"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+                </span>
+                <span class="hero-brand-flow__label">Cliente</span>
+              </li>
+            </ol>
+
+            <div class="hero-scan-card">
+              <div class="hero-scan-card__top">
+                <span class="hero-scan-card__status">
+                  <span class="hero-scan-card__dot" aria-hidden="true"></span>
+                  Escaneo OK
+                </span>
+                <span class="hero-scan-card__badge">Cola offline</span>
+              </div>
+              <p class="hero-scan-card__sku">SKU · 4829103X</p>
+              <p class="hero-scan-card__name">Caja master distribuidor</p>
+              <dl class="hero-scan-card__meta">
+                <div>
+                  <dt>Ubicación</dt>
+                  <dd>PV-P01-MT03</dd>
+                </div>
+                <div>
+                  <dt>Stock</dt>
+                  <dd>24 u.</dd>
+                </div>
+                <div>
+                  <dt>Sucursal</dt>
+                  <dd>Concepción</dd>
+                </div>
+              </dl>
+            </div>
+
+            <p class="hero-brand-panel__note">Vista ilustrativa · producto en desarrollo</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="metricas" class="metricas-v4" aria-label="Capacidades principales">
+      <div class="container metricas-v4-grid">
+        <article class="metrica-v4 reveal-item">
+          <div class="metrica-v4-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 19h16M7 16V9m5 7V5m5 11v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <p class="metrica-v4-value metrica-v4-value--text">QR</p>
+          <p class="metrica-v4-label">Escaneo móvil en recepción, picking y conteo</p>
+        </article>
+        <article class="metrica-v4 reveal-item">
+          <div class="metrica-v4-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v4M12 17v4M3 12h4M17 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <p class="metrica-v4-value metrica-v4-value--text">Offline</p>
+          <p class="metrica-v4-label">Cola de movimientos en almacén sin señal</p>
+        </article>
+        <article class="metrica-v4 reveal-item">
+          <div class="metrica-v4-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-6 9 6v10a1 1 0 01-1 1H4a1 1 0 01-1-1V9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 22V12h6v10" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <p class="metrica-v4-value metrica-v4-value--text">Multi</p>
+          <p class="metrica-v4-label">Sucursales con stock aislado por bodega</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="transformacion" class="before-after-v4" aria-label="Excel versus operación con WMS">
+      <div class="container">
+        <div class="section-header center">
+          <p class="eyebrow">Por qué cambiar</p>
+          <h2 class="section-title">De planillas frágiles a trazabilidad en almacén</h2>
+          <p class="section-lead section-lead--center">No atacamos a Excel: lo reemplazamos donde deja huecos — ubicaciones, escaneo y kárdex. Elyce está en desarrollo; esto es lo que buscamos resolver en piloto.</p>
+        </div>
+
+        <div class="before-after-grid">
+          <article class="before-card reveal-item">
+            <span class="before-after-tag before-after-tag--muted">Hoy · planilla o ERP plano</span>
+            <h3>Stock en una celda</h3>
+            <ul class="before-after-list">
+              <li>Cuadres manuales al cierre</li>
+              <li>Sin saber <em>dónde</em> está cada SKU</li>
+              <li>Picking a ciegas y sobreventas</li>
+              <li>Sin historial por movimiento real</li>
+              <li>Almacén se detiene si cae el internet</li>
+            </ul>
+          </article>
+          <article class="after-card reveal-item">
+            <span class="before-after-tag before-after-tag--accent">Con Elyce · objetivo piloto</span>
+            <h3>Operación física trazada</h3>
+            <ul class="before-after-list before-after-list--check">
+              <li>Stock por ubicación y sucursal</li>
+              <li>Escaneo QR desde el celular del operario</li>
+              <li>Picking guiado, lotes y conteo cíclico</li>
+              <li>Kárdex por cada recepción, pick o ajuste</li>
+              <li>Cola offline — sigues en el almacén</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="compare-wrap reveal-item">
+          <p class="compare-scroll-hint" aria-hidden="true">Desliza para ver la tabla →</p>
+          <table class="compare-table">
+            <caption class="visually-hidden">Comparación operativa Excel o ERP contable versus Elyce WMS</caption>
+            <thead>
+              <tr>
+                <th scope="col">Capacidad</th>
+                <th scope="col">Excel / stock plano</th>
+                <th scope="col" class="compare-col-elyce">Elyce WMS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Ubicaciones en bodega</th>
+                <td><span class="compare-no" aria-label="No">—</span></td>
+                <td class="compare-col-elyce"><span class="compare-yes" aria-label="Sí">✓</span> Pasillo, POS, multi-sucursal</td>
+              </tr>
+              <tr>
+                <th scope="row">Escaneo en operación</th>
+                <td><span class="compare-no" aria-label="No">—</span></td>
+                <td class="compare-col-elyce"><span class="compare-yes" aria-label="Sí">✓</span> QR y código de barras</td>
+              </tr>
+              <tr>
+                <th scope="row">Kárdex de movimientos</th>
+                <td>Manual o inexistente</td>
+                <td class="compare-col-elyce"><span class="compare-yes" aria-label="Sí">✓</span> Automático por evento</td>
+              </tr>
+              <tr>
+                <th scope="row">Offline en almacén</th>
+                <td><span class="compare-no" aria-label="No">—</span></td>
+                <td class="compare-col-elyce"><span class="compare-yes" aria-label="Sí">✓</span> Cola y sync segura</td>
+              </tr>
+              <tr>
+                <th scope="row">Complemento Bsale / Defontana</th>
+                <td>Facturación y stock contable</td>
+                <td class="compare-col-elyce">Capa operativa — no reemplaza ERP</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="compare-note">Elyce no está en producción aún. Los beneficios operativos se validarán con pilotos reales en el Biobío.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pasos" class="pasos-v4" aria-label="Cómo opera Elyce">
+      <div class="container">
+        <div class="section-header center pasos-v4-header">
+          <p class="eyebrow">Operación de punta a punta</p>
+          <h2 class="section-title">De la recepción al pedido listo</h2>
+          <p class="section-lead section-lead--center">Cinco momentos donde buscamos reemplazar planillas y suposiciones por trazabilidad — recepción, picking, conteo y kárdex en un solo flujo (objetivo del piloto).</p>
+        </div>
+
+        <article class="paso reveal-item">
+          <div class="paso-copy">
+            <span class="paso-num">01</span>
+            <h3>Recepción con carro y QR</h3>
+            <p>Camión en muelle, escaneo desde el celular y sesión de recepción por carro. Cada ítem queda en kárdex antes de ubicarse en estante — sin pistolas industriales.</p>
+            <a href="#whitelist" class="paso-link">Lista de espera →</a>
+          </div>
+          <figure class="paso-media">
+            <picture>
+              <source srcset="./assets/escenas/01_galpon.webp" type="image/webp">
+              <img src="./assets/escenas/01_galpon.png" alt="Almacén de distribuidora con camión en muelle de carga" loading="lazy" decoding="async" width="640" height="480">
+            </picture>
+          </figure>
+        </article>
+
+        <article class="paso paso--reverse reveal-item">
+          <div class="paso-copy">
+            <span class="paso-num">02</span>
+            <h3>Stock multicanal sincronizado</h3>
+            <p>Pedidos, tienda online y bodega física en un inventario por ubicación. El stock baja al preparar pedidos — menos sobreventas y menos cuadres manuales. Integraciones con marketplaces y ERP están en roadmap, no disponibles aún.</p>
+            <a href="#servicios" class="paso-link">Capacidades →</a>
+          </div>
+          <figure class="paso-media">
+            <picture>
+              <source srcset="./assets/escenas/02_sync.webp" type="image/webp">
+              <img src="./assets/escenas/02_sync.png" alt="Interior de bodega con racks y sincronización multicanal" loading="lazy" decoding="async" width="640" height="480">
+            </picture>
+          </figure>
+        </article>
+
+        <article class="paso reveal-item">
+          <div class="paso-copy">
+            <span class="paso-num">03</span>
+            <h3>Rutas a clientes y reposición POS</h3>
+            <p>Planifica entregas a comercios y repone puntos de venta con ubicaciones jerárquicas tipo <code class="paso-code">PV-P01-MT03</code> y mapa de pasillos.</p>
+            <a href="#para-quien" class="paso-link">¿Encaja contigo? →</a>
+          </div>
+          <figure class="paso-media">
+            <picture>
+              <source srcset="./assets/escenas/03_tienda.webp" type="image/webp">
+              <img src="./assets/escenas/03_tienda.png" alt="Mapa logístico con rutas y camiones de reparto" loading="lazy" decoding="async" width="640" height="480">
+            </picture>
+          </figure>
+        </article>
+
+        <article class="paso paso--reverse reveal-item">
+          <div class="paso-copy">
+            <span class="paso-num">04</span>
+            <h3>Picking y preparación de pedidos B2B</h3>
+            <p>Picking por zona con FEFO, verificación por escaneo y trazabilidad por lote. Menos errores en pedidos mayoristas.</p>
+            <a href="#whitelist" class="paso-link">Early access →</a>
+          </div>
+          <figure class="paso-media">
+            <picture>
+              <source srcset="./assets/escenas/04_despacho.webp" type="image/webp">
+              <img src="./assets/escenas/04_despacho.png" alt="Zona de picking y preparación de pedidos en centro de distribución" loading="lazy" decoding="async" width="640" height="480">
+            </picture>
+          </figure>
+        </article>
+
+        <article class="paso reveal-item">
+          <div class="paso-copy">
+            <span class="paso-num">05</span>
+            <h3>Conteo cíclico y kárdex</h3>
+            <p>Auditorías por zona con ajuste atómico de stock. Historial completo de movimientos por sucursal — recepción, reubicación, picking y merma.</p>
+            <a href="#whitelist" class="paso-link">Lista de espera →</a>
+          </div>
+          <figure class="paso-media">
+            <picture>
+              <source srcset="./assets/escenas/05_control.webp" type="image/webp">
+              <img src="./assets/escenas/05_control.png" alt="Camión de distribución saliendo del almacén" loading="lazy" decoding="async" width="640" height="480">
+            </picture>
+          </figure>
+        </article>
+      </div>
+    </section>
+
+    <section id="rubros" class="rubros rubros-compact">
+      <div class="container">
+        <div class="section-header center">
+          <p class="eyebrow">Dónde aplica Elyce</p>
+          <h2 class="section-title">Un WMS para cada operación física</h2>
+          <p class="section-lead section-lead--center">PyMEs chilenas con bodega propia, más de 500 SKUs y necesidad de trazabilidad real — no solo stock plano en Excel.</p>
+        </div>
+        <div class="rubros-grid">
+          <div class="rubro-chip reveal-item">
+            <div class="rubro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-6 9 6v10a1 1 0 01-1 1H4a1 1 0 01-1-1V9z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/><path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.75"/></svg></div>
+            <span>Distribuidoras B2B</span>
+          </div>
+          <div class="rubro-chip reveal-item">
+            <div class="rubro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6h15l-1.5 9h-12L6 6z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/><circle cx="9" cy="19" r="1.5" fill="currentColor"/><circle cx="18" cy="19" r="1.5" fill="currentColor"/></svg></div>
+            <span>E-commerce</span>
+          </div>
+          <div class="rubro-chip reveal-item">
+            <div class="rubro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg></div>
+            <span>Ferreterías</span>
+          </div>
+          <div class="rubro-chip reveal-item">
+            <div class="rubro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75"/></svg></div>
+            <span>Farmacias e insumos</span>
+          </div>
+          <div class="rubro-chip reveal-item">
+            <div class="rubro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.35-6-10a6 6 0 1112 0c0 5.65-6 10-6 10z" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="11" r="2" stroke="currentColor" stroke-width="1.75"/></svg></div>
+            <span>Veterinarias</span>
+          </div>
+          <div class="rubro-chip reveal-item">
+            <div class="rubro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 22V12M12 12C12 8 8 6 5 8c-1.5 1-2 3-2 4 0 3 2 5 4 5h5M12 12c0-4 4-6 7-4 1.5 1 2 3 2 4 0 3-2 5-4 5h-5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+            <span>Agroindustria</span>
+          </div>
+          <div class="rubro-chip reveal-item">
+            <div class="rubro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="currentColor" stroke-width="1.75"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" stroke="currentColor" stroke-width="1.75"/></svg></div>
+            <span>Importadoras</span>
+          </div>
+          <div class="rubro-chip reveal-item">
+            <div class="rubro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.75"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.75"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.75"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.75"/></svg></div>
+            <span>Retail mayorista</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="para-quien" class="para-quien-v4" aria-label="Para quién es Elyce">
+      <div class="container">
+        <div class="section-header center">
+          <p class="eyebrow">Por qué existimos</p>
+          <h2 class="section-title">Hecho en el Biobío, para bodegas que mueven stock de verdad</h2>
+          <p class="section-lead section-lead--center">Early access prioriza PyMEs con operación física real — no buscamos reemplazar tu facturador ni venderte hardware.</p>
+        </div>
+        <div class="para-quien-grid para-quien-dual">
+          <article class="para-quien-mission reveal-item">
+            <h3>Por qué estamos creando Elyce</h3>
+            <p>Conocemos PyMEs con bodega propia que cuadran en Excel, pierden horas en picking y no saben <em>dónde</em> está cada SKU — aunque el ERP diga que hay stock.</p>
+            <p>Elyce es la capa operativa que falta: escaneo desde el celular, ubicaciones, kárdex y multi-sucursal — accesible para PyME, sin pistolas ni WMS enterprise.</p>
+            <p>El producto está en desarrollo; abriremos pilotos cerrados en el Biobío para validar con operación real, no con promesas de software terminado.</p>
+            <blockquote class="para-quien-quote">
+              Lo construimos porque vimos almacenes excelentes en ventas pero frágiles en piso — y creemos que la trazabilidad no debería ser solo para las grandes.
+            </blockquote>
+          </article>
+          <article class="para-quien-card para-quien-card--si reveal-item">
+            <h3>Si te suena familiar…</h3>
+            <ul class="para-quien-list para-quien-list--check">
+              <li>Tienes bodega propia con más de ~500 SKUs y movimiento diario</li>
+              <li>Operarios escanean o pueden aprender QR en recepción y picking</li>
+              <li>Necesitas saber <em>dónde</em> está el stock, no solo cuánto hay</li>
+              <li>Tienes una o más sucursales y cuadres manuales frecuentes</li>
+              <li>Usas Bsale, Defontana u otro ERP y te falta capa operativa en almacén</li>
+              <li>Mueves mercadería todos los días y el cuadre manual te quita tiempo</li>
+            </ul>
+            <p class="para-quien-note">¿Tu operación es distinta? Cuéntanos en la lista de espera — priorizamos perfiles con dolor real en almacén.</p>
+          </article>
+        </div>
+        <div class="para-quien-cta reveal-item">
+          <p class="para-quien-cta__text">¿Quieres ser de los primeros en probarlo?</p>
+          <a href="#whitelist" class="btn btn-outline">Unirme a la lista de espera</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios" class="servicios servicios-v4">
+      <div class="container">
+        <div class="section-header center">
+          <p class="eyebrow">Capacidades</p>
+          <h2 class="section-title">Capacidades que estamos construyendo</h2>
+          <p class="section-lead section-lead--center">WMS especializado para PyMEs — más operativo que un ERP contable, más accesible que soluciones enterprise. Construido en el Biobío para almacenes reales; algunas integraciones aún están en roadmap.</p>
+        </div>
+
+        <div class="bento-grid">
+          <article class="bento-card bento-card--wide bento-card--hero reveal-item">
+            <div class="bento-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="32" rx="4" stroke="currentColor" stroke-width="2"/><path d="M16 18h16M16 24h12M16 30h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Escaneo móvil QR y código de barras</h3>
+            <p>Desde la cámara del celular — recepción, picking, conteo y consulta rápida. Sin pistolas ni hardware dedicado.</p>
+          </article>
+          <article class="bento-card reveal-item">
+            <div class="bento-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><path d="M8 38V14l16-8 16 8v24" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M20 38V26h8v12" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <h3>Ubicaciones jerárquicas</h3>
+            <p>Bodega → zona → posición con mapa POS y código <code class="bento-code">PV-Pxx-MTyy</code>.</p>
+          </article>
+          <article class="bento-card reveal-item">
+            <div class="bento-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><path d="M12 24a12 12 0 0124 0" stroke="currentColor" stroke-width="2"/><path d="M8 24h4M36 24h4M24 8v4M24 36v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="24" r="4" fill="currentColor"/></svg>
+            </div>
+            <h3>Operación offline</h3>
+            <p>Cola de movimientos en almacén. Sincroniza al recuperar señal sin duplicar transacciones.</p>
+          </article>
+          <article class="bento-card reveal-item">
+            <div class="bento-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><path d="M6 12h12v28H6zM18 20h12v20H18zM30 8h12v32H30z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Multi-sucursal</h3>
+            <p>Stock aislado por bodega, mínimos por sucursal y vista global para administradores.</p>
+          </article>
+          <article class="bento-card reveal-item">
+            <div class="bento-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><rect x="10" y="12" width="28" height="28" rx="3" stroke="currentColor" stroke-width="2"/><path d="M18 8v8M30 8v8M10 22h28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Lotes y FEFO</h3>
+            <p>Trazabilidad por lote y vencimiento en picking — primero lo que vence.</p>
+          </article>
+          <article class="bento-card bento-card--wide reveal-item">
+            <div class="bento-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><path d="M6 32l12-16 10 10 14-18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="38" cy="10" r="3" fill="currentColor"/></svg>
+            </div>
+            <h3>Conteo cíclico y kárdex</h3>
+            <p>Auditorías por zona con ajuste atómico de stock. Historial completo: recepción, reubicación, picking, merma y devoluciones.</p>
+          </article>
+          <article class="bento-card reveal-item">
+            <div class="bento-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><path d="M10 14h28v22H10z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 14V10h16v4M20 22h8M20 28h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Pedidos y retiros en tienda</h3>
+            <p>Preparación, picking y entrega en mostrador con códigos separados para bodega y cliente. No gestionamos courier ni transporte externo.</p>
+          </article>
+        </div>
+
+        <div class="servicios-gallery servicios-gallery--v4">
+          <figure class="gallery-card reveal-item">
+            <picture>
+              <source srcset="./assets/escenas/gallery_recepcion.webp" type="image/webp">
+              <img src="./assets/escenas/gallery_recepcion.png" alt="Recepción con escaneo QR en muelle de distribuidora" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>Recepción y trazabilidad</figcaption>
+          </figure>
+          <figure class="gallery-card reveal-item">
+            <picture>
+              <source srcset="./assets/escenas/gallery_picking.webp" type="image/webp">
+              <img src="./assets/escenas/gallery_picking.png" alt="Pasillo de picking por zona en bodega B2B" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>Picking por zona</figcaption>
+          </figure>
+          <figure class="gallery-card reveal-item">
+            <picture>
+              <source srcset="./assets/escenas/gallery_flota.webp" type="image/webp">
+              <img src="./assets/escenas/gallery_flota.png" alt="Camiones de distribución propia saliendo del almacén con pedidos preparados" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>Salida de pedidos preparados</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="whitelist" class="whitelist-v4">
+      <div class="container">
+        <div class="section-header center">
+          <p class="eyebrow">Early access</p>
+          <h2 class="section-title">Reserva tu lugar en early access</h2>
+          <p class="section-lead section-lead--center">Estamos en desarrollo — cuéntanos de tu bodega y te avisamos cuando abramos piloto cerrado en el Biobío o acceso anticipado general.</p>
+        </div>
+
+        <div class="plan-teaser-grid">
+          <article class="plan-teaser reveal-item">
+            <h3>Starter</h3>
+            <p class="plan-teaser-desc">Una sucursal, catálogo en crecimiento.</p>
+            <p class="plan-teaser-price"><span class="plan-teaser-ref">desde </span>1 UF <span>/ mes + IVA</span></p>
+            <ul class="plan-teaser-limits">
+              <li>1 sucursal · 3 usuarios · 500 SKUs</li>
+              <li>Inventario, consulta, recepción, Gestor QR</li>
+            </ul>
+          </article>
+          <article class="plan-teaser plan-teaser--focus reveal-item">
+            <span class="plan-teaser-badge">Referencia</span>
+            <h3>Pro</h3>
+            <p class="plan-teaser-desc">Operación completa y multi-sucursal.</p>
+            <p class="plan-teaser-price"><span class="plan-teaser-ref">desde </span>3 UF <span>/ mes + IVA</span></p>
+            <ul class="plan-teaser-limits">
+              <li>3 sucursales · 10 usuarios · 2.500 SKUs</li>
+              <li>+ Picking, conteo, mapa POS, reportes WMS</li>
+            </ul>
+          </article>
+          <article class="plan-teaser reveal-item">
+            <h3>Enterprise</h3>
+            <p class="plan-teaser-desc">Multi-local mediana e compras.</p>
+            <p class="plan-teaser-price"><span class="plan-teaser-ref">desde </span>6 UF <span>/ mes + IVA</span></p>
+            <ul class="plan-teaser-limits">
+              <li>5 sucursales · 25 usuarios · 6.000 SKUs</li>
+              <li>+ Proveedores / órdenes de compra</li>
+            </ul>
+          </article>
+        </div>
+        <p class="plan-teaser-note">Precios orientativos en UF mensual + IVA. Anual: 10 / 30 / 60 UF (2 meses gratis). Add-on +1 sucursal: 0,75 UF + IVA/mes. No constituyen oferta comercial — producto en desarrollo, pilotos Biobío. Sin permanencia.</p>
+
+        <div class="plan-modules reveal-item">
+          <h3 class="plan-modules-title">Módulos incluidos por plan</h3>
+          <div class="plan-table-wrap">
+            <table class="plan-table">
+              <thead>
+                <tr>
+                  <th>Módulo</th>
+                  <th>Starter</th>
+                  <th>Pro</th>
+                  <th>Enterprise</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Inventario, consulta, recepción, Gestor QR</td><td>✓</td><td>✓</td><td>✓</td></tr>
+                <tr><td>Picking, reubicación, conteo cíclico</td><td>—</td><td>✓</td><td>✓</td></tr>
+                <tr><td>Mapa POS, reportes WMS, alertas reorden</td><td>—</td><td>✓</td><td>✓</td></tr>
+                <tr><td>Proveedores y órdenes de compra</td><td>—</td><td>—</td><td>✓</td></tr>
+                <tr><td>Envíos, DTE, integraciones (ML, etc.)</td><td colspan="3" class="plan-table-soon">Próximamente — roadmap 2027</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="plan-roadmap reveal-item">
+          <h3 class="plan-modules-title">Roadmap integraciones 2027</h3>
+          <p class="plan-roadmap-lead">En desarrollo activo — visibles en el producto con badge «Próximamente». Sin promesa de fecha comercial hasta validación en piloto.</p>
+          <ul class="plan-roadmap-list">
+            <li><strong>Envíos:</strong> Chilexpress, Starken, BlueExpress</li>
+            <li><strong>DTE:</strong> guías de despacho vía Acepta / TocDoc</li>
+            <li><strong>Marketplaces:</strong> MercadoLibre, Jumpseller</li>
+          </ul>
+        </div>
+
+        <div class="whitelist-form-wrap reveal-item">
+          <p id="whitelist-prefill-banner" class="whitelist-prefill-banner" hidden role="status">Tu correo quedó precargado. Completa los campos obligatorios para unirte a la lista.</p>
+          <form id="whitelist-form" class="whitelist-form" novalidate aria-describedby="whitelist-prefill-banner">
+            <div class="whitelist-form-grid">
+              <label class="whitelist-field">
+                <span>Nombre *</span>
+                <input type="text" name="nombre" id="whitelist-nombre" required autocomplete="name" maxlength="120">
+                <span class="whitelist-field-error" aria-live="polite"></span>
+              </label>
+              <label class="whitelist-field">
+                <span>Correo *</span>
+                <input type="email" name="email" id="whitelist-email" required autocomplete="email" maxlength="160">
+                <span class="whitelist-field-error" aria-live="polite"></span>
+              </label>
+              <label class="whitelist-field">
+                <span>Empresa *</span>
+                <input type="text" name="empresa" required autocomplete="organization" maxlength="120">
+                <span class="whitelist-field-error" aria-live="polite"></span>
+              </label>
+              <label class="whitelist-field">
+                <span>Teléfono *</span>
+                <input type="tel" name="telefono" required autocomplete="tel" maxlength="24" placeholder="+56 9 …" inputmode="tel">
+                <span class="whitelist-field-error" aria-live="polite"></span>
+              </label>
+              <label class="whitelist-field whitelist-field--full">
+                <span>Rubro *</span>
+                <select name="rubro" required>
+                  <option value="">Selecciona…</option>
+                  <option value="Distribuidora B2B">Distribuidora B2B</option>
+                  <option value="E-commerce">E-commerce</option>
+                  <option value="Ferretería">Ferretería</option>
+                  <option value="Farmacia / insumos">Farmacia / insumos</option>
+                  <option value="Veterinarias">Veterinarias</option>
+                  <option value="Agroindustria">Agroindustria</option>
+                  <option value="Importadoras">Importadoras</option>
+                  <option value="Retail mayorista">Retail mayorista</option>
+                  <option value="Otro">Otro</option>
+                </select>
+                <span class="whitelist-field-error" aria-live="polite"></span>
+              </label>
+              <label class="whitelist-field whitelist-field--full">
+                <span>Mensaje (opcional)</span>
+                <textarea name="mensaje" rows="3" maxlength="500" placeholder="¿Qué problema de bodega quieres resolver?"></textarea>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary" id="whitelist-submit">Unirme a la lista de espera</button>
+            <p id="whitelist-success" class="form-message form-message--success" hidden role="status"></p>
+            <p id="whitelist-error" class="form-message form-message--error" hidden role="alert"></p>
+          </form>
+          <p class="whitelist-note">Sin spam ni tarjeta de crédito. Solo te contactaremos cuando tengamos fecha de piloto o early access. Los campos marcados con * son obligatorios.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="container">
+        <div class="section-header center">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2 class="section-title">Lo que nos preguntan las PyMEs</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal-item">
+            <button type="button" class="faq-question" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">¿Por qué pagar si uso Excel gratis?</button>
+            <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1"><div class="faq-answer-inner">Excel no escala: errores de digitación, stock fantasma y horas de cuadre manual. Un WMS reduce sobreventas, mermas y tiempo de picking. Mostramos precios referenciales en UF; el detalle de cada plan y la facturación se confirmarán antes del lanzamiento. Por ahora puedes unirte a la lista de espera.</div></div>
+          </div>
+          <div class="faq-item reveal-item">
+            <button type="button" class="faq-question" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">Ya tengo Bsale o Defontana, ¿para qué Elyce?</button>
+            <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2"><div class="faq-answer-inner">Los ERPs contables manejan stock plano (cuánto hay), no la operación física: ubicaciones, picking guiado, lotes y conteos cíclicos. Elyce complementa tu facturador — no lo reemplaza.</div></div>
+          </div>
+          <div class="faq-item reveal-item">
+            <button type="button" class="faq-question" id="faq-q2b" aria-expanded="false" aria-controls="faq-a2b">¿Elyce reemplaza mi ERP o facturación?</button>
+            <div class="faq-answer" id="faq-a2b" role="region" aria-labelledby="faq-q2b"><div class="faq-answer-inner">No. Elyce es la capa operativa del almacén — ubicaciones, escaneo, picking y kárdex. Tu facturador (Bsale, Defontana, etc.) sigue siendo el sistema contable. Si solo necesitas facturación o nómina, un ERP sigue siendo la herramienta adecuada.</div></div>
+          </div>
+          <div class="faq-item reveal-item">
+            <button type="button" class="faq-question" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">Mis operarios no son tecnológicos</button>
+            <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3"><div class="faq-answer-inner">Si saben usar WhatsApp o escanear un QR en un restaurante, ya dominan la base. La interfaz móvil es simple; en piloto cerrado planeamos acompañamiento inicial — no prometemos despliegue llave en mano aún.</div></div>
+          </div>
+          <div class="faq-item reveal-item">
+            <button type="button" class="faq-question" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">¿Qué pasa si se cae el internet en la bodega?</button>
+            <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4"><div class="faq-answer-inner">Elyce funciona offline-first: sigues escaneando y registrando movimientos en el almacén. Al recuperar señal, sincroniza todo de forma segura sin duplicar transacciones.</div></div>
+          </div>
+          <div class="faq-item reveal-item">
+            <button type="button" class="faq-question" id="faq-q5" aria-expanded="false" aria-controls="faq-a5">¿Cuánto costará y qué incluye cada plan?</button>
+            <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5"><div class="faq-answer-inner">Starter 1 UF, Pro 3 UF y Enterprise 6 UF + IVA por mes (referenciales). Límites publicados en esta página: sucursales, usuarios y SKUs por plan. Pilotos en Biobío: 60 días gratis con plan Pro. Desde 2027: trial 14 días sin tarjeta. Al unirte a la lista de espera no asumes ningún pago.</div></div>
+          </div>
+          <div class="faq-item reveal-item">
+            <button type="button" class="faq-question" id="faq-q5b" aria-expanded="false" aria-controls="faq-a5b">¿Qué pasa si no pago una factura?</button>
+            <div class="faq-answer" id="faq-a5b" role="region" aria-labelledby="faq-q5b"><div class="faq-answer-inner">Política prevista (sin automatización aún): aviso tras ~5 días de mora, suspensión de acceso si no se regulariza, y resguardo de datos ~120 días antes de eliminación. Siempre con comunicación directa — no bloqueos automáticos duros en día fijo del mes.</div></div>
+          </div>
+          <div class="faq-item reveal-item">
+            <button type="button" class="faq-question" id="faq-q6" aria-expanded="false" aria-controls="faq-a6">¿Cuándo puedo usar Elyce?</button>
+            <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6"><div class="faq-answer-inner">Estamos en desarrollo activo — no hay producto en producción aún. Completa el formulario de lista de espera y te contactamos cuando abramos piloto o lanzamiento.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="sticky-cta" id="sticky-cta" aria-label="Acceso rápido a lista de espera" hidden>
+    <a href="#whitelist" class="sticky-cta-link">Lista de espera</a>
+    <button type="button" class="sticky-cta-dismiss" id="sticky-cta-dismiss" aria-label="Ocultar barra">×</button>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#hero" class="brand">
+            <img src="assets/logo-lockup.svg" alt="Elyce Warehouse Management" class="brand-lockup" width="200" height="36">
+          </a>
+          <p>SaaS de gestión operativa de bodegas para PyMEs. Digitalizando la logística chilena desde el Biobío.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Producto</h4>
+          <a href="#transformacion">Por qué Elyce</a>
+          <a href="#pasos">Operación</a>
+          <a href="#para-quien">Para quién</a>
+          <a href="#servicios">Capacidades</a>
+        </div>
+        <div class="footer-col">
+          <h4>Early access</h4>
+          <a href="#whitelist">Lista de espera</a>
+          <a href="#faq">Preguntas frecuentes</a>
+          <p>Biobío, Chile · Producto en desarrollo</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Elyce WMS. Precios referenciales en UF — no constituyen oferta comercial.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="js/experiencia-v4.js" defer></script>
+</body>
+</html>

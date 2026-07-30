@@ -1,0 +1,8 @@
+{
+  "buildCommand": null,
+  "framework": null,
+  "redirects": [
+    { "source": "/experiencia", "destination": "/", "permanent": true },
+    { "source": "/experiencia.html", "destination": "/", "permanent": true }
+  ]
+}

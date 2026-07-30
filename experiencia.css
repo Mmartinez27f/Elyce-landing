@@ -1,0 +1,533 @@
+/* Elyce WMS v3 — Journey Emons-style (WebGL + overlay) */
+
+.elyce-journey {
+  position: relative;
+  min-height: 100vh;
+}
+
+#elyce-stage {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+}
+
+.elyce-fallback {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: none;
+  pointer-events: none;
+}
+
+.elyce-fallback-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  will-change: opacity, transform;
+}
+
+.elyce-fallback-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+  display: block;
+}
+
+.elyce-fallback-img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.elyce-journey--hybrid .elyce-fallback-img {
+  transition: none;
+}
+
+.elyce-journey--composite .elyce-fallback {
+  display: block;
+  z-index: 0;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.elyce-journey--composite .elyce-fallback--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.elyce-journey--composite .elyce-fallback-img {
+  transition: none;
+}
+
+.elyce-journey--composite #elyce-stage {
+  display: block;
+  z-index: 1;
+}
+
+.elyce-journey--animated .elyce-fallback {
+  display: block;
+  z-index: 0;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.elyce-journey--animated .elyce-fallback--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.elyce-journey--animated .elyce-fallback-img {
+  transition: none;
+}
+
+.elyce-journey--animated #elyce-stage {
+  display: block;
+  z-index: 1;
+}
+
+.elyce-journey--static .elyce-fallback {
+  display: block;
+}
+
+.elyce-journey--webgl .elyce-fallback,
+.elyce-journey--hybrid .elyce-fallback {
+  display: block;
+  z-index: 0;
+}
+
+.elyce-journey--static #elyce-stage {
+  display: none !important;
+}
+
+.elyce-journey--hybrid #elyce-stage {
+  display: none;
+}
+
+.elyce-journey--webgl #elyce-stage {
+  z-index: 1;
+}
+
+.elyce-journey--webgl.elyce-journey--webgl-ready #elyce-stage {
+  display: block;
+}
+
+/* Overlay UI */
+.elyce-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--header-h) + 32px) clamp(20px, 5vw, 64px) 100px;
+}
+
+.elyce-card-stack {
+  position: relative;
+  width: min(100%, 420px);
+  min-height: 320px;
+  pointer-events: auto;
+}
+
+.elyce-copy-panel {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  border-radius: 16px;
+  padding: clamp(28px, 4vw, 48px);
+  box-shadow: 0 24px 80px rgba(27, 67, 50, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+}
+
+.elyce-copy-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.elyce-journey--webgl .elyce-copy-panel,
+.elyce-journey--hybrid .elyce-copy-panel {
+  transition: none;
+  opacity: 0;
+  visibility: visible;
+}
+
+.elyce-journey--webgl .elyce-copy-panel.is-active,
+.elyce-journey--hybrid .elyce-copy-panel.is-active {
+  opacity: 1;
+}
+
+.elyce-copy-panel h2 {
+  font-family: var(--font-body);
+  font-size: clamp(1.85rem, 3.5vw, 2.65rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--fg);
+  margin-bottom: 18px;
+}
+
+.elyce-copy-panel .lead {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin-bottom: 28px;
+  max-width: 36ch;
+}
+
+.elyce-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Rail inferior */
+.elyce-rail {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(183, 228, 199, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(27, 67, 50, 0.1);
+  backdrop-filter: blur(12px);
+  pointer-events: auto;
+}
+
+.elyce-rail-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  background: transparent;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.elyce-rail-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.elyce-rail-btn:hover {
+  background: var(--accent-light);
+  color: var(--fg);
+}
+
+.elyce-rail-btn.is-active {
+  background: var(--fg);
+  color: #fff;
+  transform: scale(1.04);
+}
+
+.elyce-rail-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  margin: 0 4px;
+}
+
+.elyce-rail-cta {
+  padding: 10px 18px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.elyce-rail-cta:hover {
+  background: var(--accent-dark);
+}
+
+/* Progress dots (vertical, estilo Emons t10) */
+.elyce-progress-dots {
+  position: fixed;
+  right: clamp(16px, 2vw, 28px);
+  top: 50%;
+  transform: translateY(-40%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.elyce-progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(27, 67, 50, 0.25);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.elyce-progress-dot:hover {
+  border-color: var(--accent);
+  transform: scale(1.15);
+}
+
+.elyce-progress-dot.is-active {
+  background: var(--fg);
+  border-color: var(--fg);
+  transform: scale(1.35);
+}
+
+/* Lenis: no scroll nativo suave en hero */
+html:has(.elyce-journey) {
+  scroll-behavior: auto;
+}
+
+/* Scroll track */
+.elyce-track {
+  position: relative;
+  z-index: 2;
+  height: 500vh;
+  pointer-events: none;
+}
+
+.elyce-spacer {
+  height: 100vh;
+}
+
+/* Servicios v3 — estilo t11 */
+.servicios-emons {
+  background: #f5f7f6;
+  padding: 88px 0 100px;
+  border-top: 1px solid rgba(183, 228, 199, 0.5);
+}
+
+.servicios-icons-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 48px;
+  margin-bottom: 56px;
+  padding: 48px 24px;
+  background: #fff;
+  border-radius: 0;
+}
+
+.servicio-icon-3d {
+  width: 120px;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: #fff;
+}
+
+.servicio-icon-3d img {
+  max-height: 100%;
+  width: auto;
+  filter: drop-shadow(0 10px 20px rgba(27, 67, 50, 0.12));
+}
+
+.servicios-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 0;
+}
+
+.servicios-gallery--t11 .gallery-card {
+  border-radius: 0;
+  aspect-ratio: 4 / 3;
+}
+
+.servicios-copy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.servicios-copy-grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1100px;
+}
+
+.servicio-copy h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 8px;
+}
+
+.servicio-copy p {
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.gallery-card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.gallery-card img,
+.gallery-card picture,
+.gallery-card picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-card figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 16px 18px;
+  background: linear-gradient(transparent, rgba(27, 67, 50, 0.72));
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.servicios-emons .servicios-track {
+  margin-top: 48px;
+}
+
+.servicios-emons .servicio-card {
+  border: none;
+  box-shadow: 0 4px 24px rgba(27, 67, 50, 0.06);
+}
+
+.servicios-emons .servicio-visual--img img {
+  max-height: 48px;
+  width: auto;
+  filter: drop-shadow(0 6px 12px rgba(27, 67, 50, 0.1));
+}
+
+.elyce-journey--done #elyce-stage,
+.elyce-journey--done .elyce-overlay,
+.elyce-journey--done .elyce-rail,
+.elyce-journey--done .elyce-progress-dots {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#rubros,
+#servicios,
+.pricing,
+.faq,
+.cta-band,
+.site-footer {
+  position: relative;
+  z-index: 6;
+  background: var(--bg);
+}
+
+.rubros-compact {
+  padding: 64px 0;
+}
+
+.rubros-compact .section-header {
+  margin-bottom: 36px;
+}
+
+.rubros-compact .rubros-grid {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.rubros-compact .rubro-chip {
+  padding: 18px 12px;
+}
+
+.rubros-compact .rubro-icon {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+}
+
+@media (max-width: 1023px) {
+  .elyce-overlay {
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    pointer-events: auto;
+  }
+
+  .elyce-card-stack {
+    width: 100%;
+    min-height: auto;
+    padding: calc(var(--header-h) + 16px) 20px 24px;
+  }
+
+  .elyce-copy-panel {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    margin-bottom: 16px;
+    display: none;
+  }
+
+  .elyce-copy-panel.is-active {
+    display: block;
+  }
+
+  .elyce-track {
+    height: 400vh;
+  }
+
+  .elyce-rail {
+    bottom: 16px;
+    padding: 8px 10px;
+    max-width: calc(100% - 24px);
+  }
+
+  .elyce-rail-cta {
+    display: none;
+  }
+
+  .servicios-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .servicios-copy-grid,
+  .servicios-copy-grid--4 {
+    grid-template-columns: 1fr;
+  }
+
+  .elyce-progress-dots {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elyce-copy-panel {
+    transition: none;
+  }
+
+  .elyce-fallback-img {
+    transition: none;
+  }
+}

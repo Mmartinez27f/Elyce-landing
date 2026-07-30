@@ -1,0 +1,17 @@
+# Remotion dev
+remotion/node_modules/
+
+# Preview local
+preview/
+
+# Assets de trabajo (no deploy)
+assets/escenas/hero_elyce.png
+assets/escenas/frames/
+assets/escenas/layers/
+assets/escenas/*.ps1
+assets/ref/
+
+# OS / editor
+.DS_Store
+.idea/
+*.log

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento de Pedido - Elyce</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .tracking-section {
+            padding: 80px 0;
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+        }
+        .tracking-card {
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .search-box {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .search-input {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-glow);
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 40px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .timeline-step {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .timeline-step:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-icon {
+            position: absolute;
+            left: -37px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--dark-bg);
+            z-index: 2;
+        }
+        .timeline-step.completed .timeline-icon {
+            background: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        .timeline-step.current .timeline-icon {
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+            border: 4px solid rgba(59, 130, 246, 0.3);
+            left: -40px;
+            width: 22px;
+            height: 22px;
+        }
+        .timeline-step.error .timeline-icon {
+            background: #ef4444;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        }
+        .step-title {
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .timeline-step.completed .step-title, .timeline-step.current .step-title {
+            color: var(--white);
+        }
+        .step-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .tracking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .tracking-status {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .status-green { color: #10b981; }
+        .status-red { color: #ef4444; }
+        
+        #result-container {
+            display: none;
+        }
+        #error-msg {
+            display: none;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        .spinner {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <div class="logo-box"><i class="fas fa-cubes logo-icon"></i></div>
+                <span>Elyce<span class="logo-accent">WMS</span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Volver al Inicio</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="tracking-section">
+        <div class="container">
+            <div class="glass-card tracking-card" style="padding: 40px;">
+                <h2 style="margin-bottom: 10px; color: var(--white); text-align: center;">Rastrea tu Pedido</h2>
+                <p style="color: var(--text-secondary); text-align: center; margin-bottom: 30px;">Ingresa el código que recibiste en tu correo para ver el estado en tiempo real.</p>
+                
+                <form id="search-form" class="search-box">
+                    <input type="text" id="codigo-input" class="search-input" placeholder="Ej: PED-1234..." required>
+                    <button type="submit" class="btn btn-primary" id="btn-buscar">Buscar <i class="fas fa-search"></i></button>
+                </form>
+
+                <div id="error-msg">No se encontró información para este código de pedido. Verifica que esté bien escrito.</div>
+                
+                <div class="loader" id="loader">
+                    <div class="spinner"></div>
+                </div>
+
+                <div id="result-container">
+                    <div class="tracking-header">
+                        <div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">Pedido: <span id="lbl-id" style="color: var(--white); font-weight: bold;"></span></div>
+                            <div class="tracking-status" id="lbl-status">Cargando...</div>
+                        </div>
+                        <i class="fas fa-box-open" id="icon-status" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <span style="color: var(--text-secondary); font-size: 0.9rem;">Destinatario:</span>
+                        <strong style="color: var(--white);" id="lbl-cliente"></strong>
+                    </div>
+                    <div>
+                        <span style="color: var(--text-secondary); font-size: 0.9rem;">Dirección:</span>
+                        <span style="color: var(--white);" id="lbl-direccion"></span>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-step" id="step-0">
+                            <div class="timeline-icon"></div>
+                            <div class="step-title">Pedido Recibido</div>
+                            <div class="step-desc">El vendedor ha registrado tu pedido en el sistema.</div>
+                        </div>
+                        <div class="timeline-step" id="step-1">
+                            <div class="timeline-icon"></div>
+                            <div class="step-title">En Preparación</div>
+                            <div class="step-desc">El pedido está siendo preparado en bodega.</div>
+                        </div>
+                        <div class="timeline-step" id="step-2">
+                            <div class="timeline-icon"></div>
+                            <div class="step-title">En Tránsito</div>
+                            <div class="step-desc">El pedido va en camino a tu domicilio.</div>
+                        </div>
+                        <div class="timeline-step" id="step-3">
+                            <div class="timeline-icon"></div>
+                            <div class="step-title" id="lbl-step-3-title">Entregado</div>
+                            <div class="step-desc" id="lbl-step-3-desc">El pedido ha sido entregado exitosamente.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" style="padding: 30px 0; text-align: center; border-top: 1px solid var(--border-color); background: #05070c;">
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">&copy; 2026 Elyce WMS.</p>
+    </footer>
+
+    <script>
+        // CONFIGURACIÓN SUPABASE
+        const supabaseUrl = 'https://ujmzpgcvxpcqmjemlnan.supabase.co';
+        const supabaseKey = 'sb_publishable_5eVcO5pf0UND4D1-f1iu8A_EfDYiULA';
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+        const form = document.getElementById('search-form');
+        const input = document.getElementById('codigo-input');
+        const loader = document.getElementById('loader');
+        const resultContainer = document.getElementById('result-container');
+        const errorMsg = document.getElementById('error-msg');
+        const btnBuscar = document.getElementById('btn-buscar');
+
+        // Función para limpiar estados del timeline
+        function limpiarTimeline() {
+            for(let i=0; i<=3; i++) {
+                const step = document.getElementById('step-'+i);
+                step.className = 'timeline-step';
+            }
+        }
+
+        // Buscar al enviar formulario
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const codigo = input.value.trim();
+            if(!codigo) return;
+            
+            // Actualizar URL sin recargar
+            const url = new URL(window.location);
+            url.searchParams.set('id', codigo);
+            window.history.pushState({}, '', url);
+
+            buscarPedido(codigo);
+        });
+
+        async function buscarPedido(codigo) {
+            errorMsg.style.display = 'none';
+            resultContainer.style.display = 'none';
+            loader.style.display = 'block';
+            btnBuscar.disabled = true;
+
+            try {
+                // Llamar a la función RPC pública
+                const { data, error } = await supabaseClient.rpc('obtener_tracking_publico', { p_id: codigo });
+
+                if (error || !data) {
+                    throw new Error('No encontrado');
+                }
+
+                mostrarResultados(data);
+            } catch (err) {
+                console.error(err);
+                errorMsg.style.display = 'block';
+            } finally {
+                loader.style.display = 'none';
+                btnBuscar.disabled = false;
+            }
+        }
+
+        function mostrarResultados(data) {
+            document.getElementById('lbl-id').innerText = data.id_envio || data.id_pedido_interno || 'Desconocido';
+            document.getElementById('lbl-cliente').innerText = data.nombre_cliente || 'N/A';
+            document.getElementById('lbl-direccion').innerText = data.direccion_resumida || 'Retiro en Tienda';
+
+            const estado = data.estado_envio || 'PENDIENTE';
+            let pasoActual = 0;
+            let esDevuelto = false;
+
+            const lblStatus = document.getElementById('lbl-status');
+            const iconStatus = document.getElementById('icon-status');
+
+            if (estado === 'ENTREGADO') {
+                pasoActual = 3;
+                lblStatus.innerText = 'Entregado';
+                lblStatus.className = 'tracking-status status-green';
+                iconStatus.className = 'fas fa-check-circle';
+                iconStatus.style.color = '#10b981';
+            } else if (estado === 'DEVUELTO' || estado === 'RECHAZADO' || estado === 'FALLIDO') {
+                pasoActual = 3;
+                esDevuelto = true;
+                lblStatus.innerText = 'Devuelto / Cancelado';
+                lblStatus.className = 'tracking-status status-red';
+                iconStatus.className = 'fas fa-times-circle';
+                iconStatus.style.color = '#ef4444';
+            } else if (estado === 'EN_TRANSITO' || estado === 'DESPACHADO') {
+                pasoActual = 2;
+                lblStatus.innerText = 'En Camino';
+                lblStatus.className = 'tracking-status';
+                iconStatus.className = 'fas fa-truck';
+                iconStatus.style.color = 'var(--primary)';
+            } else if (estado === 'EN_PREPARACION') {
+                pasoActual = 1;
+                lblStatus.innerText = 'En Preparación';
+                lblStatus.className = 'tracking-status';
+                iconStatus.className = 'fas fa-box-open';
+                iconStatus.style.color = 'var(--primary)';
+            } else {
+                pasoActual = 0;
+                lblStatus.innerText = 'Recibido';
+                lblStatus.className = 'tracking-status';
+                iconStatus.className = 'fas fa-box';
+                iconStatus.style.color = 'var(--primary)';
+            }
+
+            limpiarTimeline();
+            
+            // Configurar textos del último paso
+            const step3Title = document.getElementById('lbl-step-3-title');
+            const step3Desc = document.getElementById('lbl-step-3-desc');
+            if(esDevuelto) {
+                step3Title.innerText = 'Devuelto';
+                step3Desc.innerText = 'El pedido no pudo ser entregado y regresó a la tienda.';
+                document.getElementById('step-3').classList.add('error');
+            } else {
+                step3Title.innerText = 'Entregado';
+                step3Desc.innerText = 'El pedido ha sido entregado exitosamente al destinatario.';
+            }
+
+            // Pintar timeline
+            for(let i=0; i<=3; i++) {
+                const step = document.getElementById('step-'+i);
+                if (i < pasoActual) {
+                    step.classList.add('completed');
+                } else if (i === pasoActual) {
+                    if(!esDevuelto && estado !== 'ENTREGADO') {
+                        step.classList.add('current');
+                    } else if (estado === 'ENTREGADO' && i === 3) {
+                        step.classList.add('completed');
+                    }
+                }
+            }
+
+            resultContainer.style.display = 'block';
+        }
+
+        // Auto-buscar si hay ID en la URL
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if(id) {
+                input.value = id;
+                buscarPedido(id);
+            }
+        });
+    </script>
+</body>
+</html>

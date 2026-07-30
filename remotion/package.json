@@ -1,0 +1,21 @@
+{
+  "name": "elyce-journey-remotion",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Render scroll-scrub frames for Elyce /experiencia landing",
+  "scripts": {
+    "studio": "remotion studio",
+    "render:galpon": "powershell -ExecutionPolicy Bypass -File ./scripts/render-chapter.ps1 -Composition GalponChapter -OutDir ../assets/escenas/frames/01_galpon",
+    "render:all": "powershell -ExecutionPolicy Bypass -File ./scripts/render-all.ps1"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.286",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.286"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.8.2"
+  }
+}
